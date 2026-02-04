@@ -1,42 +1,52 @@
-# J.P. Morgan Quantitative Research Simulation 
-> *This repository contains financial modeling and risk analysis developed during the J.P. Morgan Quant Research Virtual Experience.*
+# J.P. Morgan Quantitative Research Simulation
 
-## 📈 Project Overview
-This project covers two major workstreams: **Commodities Trading** and **Retail Credit Risk**. 
+![Python](https://img.shields.io/badge/python-3.x-blue?style=for-the-badge&logo=python)
+![JPMorgan](https://img.shields.io/badge/J.P.Morgan-Quant_Research-black?style=for-the-badge)
+
+## 📌 Executive Summary
+This project showcases quantitative solutions developed for a J.P. Morgan virtual experience. It involves high-granularity time-series forecasting for **Commodity Desks** and risk-modeling for **Retail Credit Portfolios**.
 
 ---
 
-## 📂 Task 1: Natural Gas Price Prediction
-### Objective
-To estimate future gas prices using historical data, accounting for long-term trends and seasonal fluctuations.
+## 📈 Workstream 1: Natural Gas Pricing & Strategy
+### The Challenge
+A commodities desk requires accurate pricing for natural gas storage contracts. Available market data is sparse, necessitating an extrapolation model that accounts for both long-term trends and monthly seasonal volatility.
 
 ### Methodology
-- **Linear Regression:** Captures the general upward or downward price trend over time.
-- **Seasonal Adjustments:** Calculates "monthly adders" to account for price spikes in winter and dips in summer.
+1. **Trend Analysis:** Used Linear Regression to capture the multi-year trajectory of gas prices.
+2. **Seasonal Decomposition:** Calculated monthly "adders" (deviations from the trend) to model price spikes during peak winter demand.
+3. **Valuation Engine:** Developed a contract pricing function considering injection/withdrawal fees, storage costs, and time-value of the commodity.
 
-
-
----
-
-## 📂 Task 2: Storage Contract Valuation
-### Objective
-Calculate the fair value of a gas storage contract.
-- **Logic:** Valuation = (Sale Price - Purchase Price) - Storage Costs - Injection/Withdrawal Fees.
+#### Result Visualization
+![Natural Gas Trend](gas_trend_analysis.png)
 
 ---
 
-## 📂 Task 3 & 4: Credit Risk PD Model
-### Objective
-Predict the **Probability of Default (PD)** for borrowers to estimate portfolio expected loss.
+## 🛡️ Workstream 2: Credit Risk Analysis
+### The Challenge
+The credit risk desk needs a robust way to estimate the **Probability of Default (PD)** for retail loans based on historical borrower data.
 
-### Model Performance
-I utilized a **Logistic Regression** model using variables like FICO score and Loan-to-Income (LTI) ratio. 
-- **Key Metric:** Used the AUC-ROC curve to validate model accuracy.
+### Methodology
+- **Feature Engineering:** Utilized FICO scores, Loan-to-Income (LTI) ratios, and total debt levels.
+- **Classification:** Trained a **Logistic Regression** model to determine default risk.
+- **Validation:** Measured performance using the Area Under the Curve (AUC) and Confusion Matrices to minimize False Negatives.
 
-
+#### Model Performance
+| ROC Curve | Confusion Matrix |
+| :---: | :---: |
+| ![ROC](credit_risk_roc.png) | ![CM](credit_risk_cm.png) |
 
 ---
 
-## 🛠️ Tech Stack
-- **Python** (Pandas, NumPy, Scikit-Learn)
-- **Matplotlib/Seaborn** (Data Visualization)
+## 🛠️ Technical Stack
+- **Data Manipulation:** `Pandas`, `NumPy`
+- **Machine Learning:** `Scikit-Learn`
+- **Visualization:** `Matplotlib`, `Seaborn`
+- **Math:** `SciPy` (Linear Regression and Interpolation)
+
+---
+
+## 🚀 How to Navigate
+- `/01_nat_gas_price_prediction.ipynb`: Contains the extrapolation logic and seasonality code.
+- `/02_gas_storage_contract_valuation.ipynb`: Contains the final pricing function for the desk.
+- `/03_credit_risk_pd_model.ipynb`: Contains the ML pipeline for default prediction.
